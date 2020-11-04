@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ejercicios JS</title>
+	<link href="https://fonts.googleapis.com/css2?family=Bellota+Text:wght@300;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<header>
+		<h1>Ejercicios JavaScript</h1>
+	</header>
+	<div class="container">
+		<section class="exe">
+			<h2>Ejercicio 1</h2>
+			<p class="exe_desc">
+				Programa una función que cuente el número de caracteres de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá 10.
+			</p>
+			<div class="exe_content">
+				<script>
+					function contarCaracteres(cadena = ""){
+						let ncarateres = cadena.length;
+						let tipo = typeof cadena;
+
+						if (!cadena) {
+							document.write("No ingresaste ninguna cadena<br>");
+						}
+
+						switch(tipo){
+							case "number":
+								document.write("Escribiste un número </br>");
+							break;
+
+							case "boolean":
+								document.write("Escribiste un booleano </br>");
+							break;
+
+							case "object":
+								document.write("Escribiste un objeto </br>");
+							break;
+
+							case "function":
+								document.write("Escribiste una función </br>");
+							break;
+
+							case "string":
+								document.write("Cadena: "+cadena+"</br>");
+								document.write("Número de caracteres: "+ncarateres+"</br>");
+							break;
+						}
+					}
+
+					contarCaracteres("test");
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 2</h2>
+			<p class="exe_desc">
+				Programa una función que te devuelva el texto recortado según el número de caracteres indicados, pe. miFuncion("Hola Mundo", 4) devolverá "Hola".
+			</p>
+			<div>
+				<script>
+					/*function recortarCadena(cadena, carateres){
+						let recorte = cadena.slice(0, carateres);
+						document.write("Cadena: " + cadena + "</br>");
+						document.write("Cantidad de carateres: "+ carateres + "</br>");
+						document.write("Recorte: "+recorte);
+					}*/
+
+					const recortarCadena = (cadena = "", carateres = undefined) => 
+						(!cadena) 
+							? document.write("Sin texto") 
+							: (carateres === undefined)
+								? document.write("Sin carater de recorte")
+								: document.write(cadena.slice(0, carateres));
+
+					recortarCadena("Hola Mundo", 4);
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 3</h2>
+			<p class="exe_desc">
+				Programa una función que dada una String te devuelva un Array de textos separados por cierto caracter, pe. miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'].
+			</p>
+			<div>
+				<script>
+					/*function dividirCadena(cadena, divisor){
+						let arreglo = cadena.split(divisor);
+						document.write("Cadena Dividida: "+arreglo);
+						console.log(arreglo);
+					}*/
+
+					const dividirCadena = (cadena = "", separador = undefined) =>
+						(!cadena)
+							? document.write("Cadena vacía")
+							: (separador === undefined)
+								? document.write("No ingresaste el separador")
+								: document.write(cadena.split(separador));
+
+					dividirCadena("esta es una prueba", " ");
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 4</h2>
+			<p class="exe_desc">
+				Programa una función que repita un texto X veces, pe. miFuncion('Hola Mundo', 3) devolverá Hola Mundo Hola Mundo Hola Mundo.
+			</p>
+			<div>
+				<script>
+					/*function repetirCadena(cadena, repeticiones){
+						for(let i = 1; i <= repeticiones; i++) document.write(cadena + " ");
+					}*/
+
+					const repetirCadena = (cadena = "", repeticiones = undefined) => {
+						if (!cadena) return document.write("Cadena vacía");
+						if (repeticiones === undefined) return document.write("No ingresaste un separador");
+						if (repeticiones === 0) return document.write("El número de repeticiones no puede ser cero");
+						if (Math.sign(repeticiones) === -1) return document.write("El número de repeticiones no puede ser negativo");
+
+						for(let i = 1; i <= repeticiones; i++) document.write(cadena + " ");
+					}
+
+					repetirCadena("Test", 5);
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 5</h2>
+			<p class="exe_desc">
+				Programa una función que invierta las palabras de una cadena de texto, pe. miFuncion("Hola Mundo") devolverá "odnuM aloH".
+			</p>
+			<div>
+				<script>
+					/*const invertirCadena = (cadena = "") => {
+						let cadenaInvertida = "";
+						if (!cadena) return document.write("Cadena vacía");
+						for (let i = cadena.length; i >= 0; i--) cadenaInvertida += cadena.charAt(i);
+						return document.write(cadenaInvertida);
+					}*/
+					const invertirCadena = (cadena = "") =>
+						(!cadena) 
+							? document.write("Cadena vacía") 
+							: document.write(cadena.split("").reverse().join(""));
+
+					invertirCadena("Hola Mundo");
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 6</h2>
+			<p class="exe_desc">
+				Programa una función para contar el número de veces que se repite una palabra en un texto largo, pe. miFuncion("hola mundo adios mundo", "mundo") devolverá 2.
+			</p>
+			<div>
+				<script>
+					const contarPalabra = (cadena = "", palabra = "") =>{
+						if (!cadena) return document.write("Cadena vacía");
+						if (!palabra) return document.write("palabra vacía");
+
+						let expresion = '(\\w*' + palabra + '\\w*)';
+						let matchs = cadena.match(expresion, 'gi');
+
+						if (!matchs) return document.write("No se encontraron coincidencias");
+
+						return document.write(matchs.length);
+					}
+
+					contarPalabra("hola mundo adios mundo hola mundo", "hola");
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 7</h2>
+			<p class="exe_desc">
+				Programa una función que valide si una palabra o frase dada, es un palíndromo (que se lee igual en un sentido que en otro), pe. mifuncion("Salas") devolverá true.
+			</p>
+			<div>
+				<script>
+					const esPalindromo = (cadena = "") => {
+						if (!cadena) return document.write("Cadena vacía");
+						
+						cadena = cadena.toLowerCase().replaceAll(",","").replaceAll(" ","");
+						let reverse = cadena.toLowerCase().split("").reverse().toString().replaceAll(",","").replaceAll(" ","");
+						
+						return (cadena === reverse)
+								? document.write(`Sí es palíndromo | ${cadena} = ${reverse}`)
+								: document.write(`No es palíndromo | ${cadena} = ${reverse}`);
+					}
+
+					esPalindromo("Luz azul");
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 8</h2>
+			<p class="exe_desc">
+				Programa una función que elimine cierto patrón de caracteres de un texto dado, pe. miFuncion("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz") devolverá  "1, 2, 3, 4 y 5.
+			</p>
+			<div>
+				<script>
+					const eliminarCarateres = (cadena = "", quitarCarateres = "") => 
+						(!cadena) 
+							? document.write("Cadena vacía")
+							: (!quitarCarateres) 
+								? document.write("Carateres a quitar vació")
+								: cadena.replaceAll(quitarCarateres, " ");		
+
+					document.write(eliminarCarateres("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz"));			
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 9</h2>
+			<p class="exe_desc">
+				Programa una función que obtenga un numero aleatorio entre 501 y 600.
+			</p>
+			<div>
+				<script>
+					const numeroAleatorio = () => Math.floor(Math.random() * (600 - 501) + 501);
+					document.write("Número Aleatorio: "+numeroAleatorio());
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 10</h2>
+			<p class="exe_desc">
+				Programa una función que reciba un número y evalúe si es capicúa o no (que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true.
+			</p>
+			<div>
+				<script>
+					const esCapicua = (numero = 0) => {
+						if (!numero) return document.write("No ingresaste el valor");
+						if (typeof numero !== "number") return document.write("El dato que ingresaste debe ser numérico");
+
+						let parsed = numero.toString().split("").reverse().join("");
+						parsed = parseInt(parsed, 10);
+						return (numero === parsed) 
+								? document.write("Sí es capícua: "+numero + " = " + parsed) 
+								: document.write("No es capícua: "+numero + " = " + parsed);
+					}
+
+					esCapicua(1331);
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 11</h2>
+			<p class="exe_desc">
+				Programa una función que calcule el factorial de un número (El factorial de un entero positivo n, se define como el producto de todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120.
+			</p>
+			<div>
+				<script>
+					const factorial = numero => {
+						let result = 1;
+						numero = parseInt(numero, 10);
+						for(let i = 1; i <= numero; i++){
+							result = result *  i;
+						}
+						return document.write("Factorial de: "+numero+"! = "+result);
+					}
+
+					factorial(6);
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 12</h2>
+			<p class="exe_desc">
+				Programa una función que determine si un número es primo (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
+			</p>
+			<div>
+				<script>
+					const esPrimo = (numero = 0) => {
+						if(!numero) return document.write("No ingresaste valor");
+						if(typeof numero !== "number") return document.write("Solo se permiten números");
+						
+						for(let i = 2; i < numero; i++){
+							if(numero % i === 0){
+								return document.write("false");
+							}
+						}	
+
+						return document.write(numero !== 1);
+					}
+
+					esPrimo(7);
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 13</h2>
+			<p class="exe_desc">
+				 Programa una función que determine si un número es par o impar, pe. miFuncion(29) devolverá Impar.
+			</p>
+			<div>
+				<script>
+					const esPar = (numero = 0) =>{
+						if(!numero) return document.write("No ingresaste nungún valor");
+						if(typeof numero !== "number") return document.write("Solo se permiten valores numéricos");
+
+						return (numero % 2 === 0)
+							?  document.write("El número "+numero+" es par")
+							:  document.write("El número "+numero+" no es par");
+					}
+
+					esPar(15);
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 14</h2>
+			<p class="exe_desc">
+				Programa una función para convertir grados Celsius a Fahrenheit y viceversa, pe. miFuncion(0,"C") devolverá 32°F.
+			</p>
+			<div>
+				<script>
+					const convertirGrados = (grados = 0, medida = "") => {
+						if(grados.length === 0) return document.write("Ingresa los grados");
+						if(typeof grados !== "number") return document.write("Solo se permiten números para el primer parámetro");
+						if(!medida) return document.write("No ingresaste el la unidad de temperatura.");
+						if(typeof medida !== "string") return document.write("Solo se permiten letras en el segundo parámetro.");
+						if(medida !== "C" && medida !== "F") return document.write("Unidad de temperatura desconocida");
+
+						return (medida === "C") 
+							? document.write(((grados * (9/5)) + 32)  + "°F")
+							: document.write(((grados - 32) * (5/9)) + "°C");
+					}
+					convertirGrados(0, "C");
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 15</h2>
+			<p class="exe_desc">
+				Programa una función para convertir números de base binaria a decimal y viceversa, pe. miFuncion(100,2) devolverá 4 base 10.
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 16</h2>
+			<p class="exe_desc">
+				Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, pe. miFuncion(1000, 20) devolverá 800.
+			</p>
+			<div>
+				<script>
+					const descuento = (cantidad = 0, descuento = 0) => {
+						if(cantidad === 0 && descuento === 0) return document.write("Ingresa la cantidad y el descuento")
+						if(!cantidad) return document.write("Ingresa una cantidad");
+						if(!descuento) return document.write("Ingresa un descuento");
+						if(typeof cantidad !== "number" || typeof descuento !== "number") return document.write("Solo se permiten números");
+						
+						descuento = cantidad - (cantidad * ((descuento / 100)));
+						
+						return document.write("Resultado: " + descuento);
+					}
+
+					descuento(1000, 20);
+				</script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 17</h2>
+			<p class="exe_desc">
+				Programa una función que dada una fecha válida determine cuantos años han pasado hasta el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020).
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 18</h2>
+			<p class="exe_desc">
+				Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 19</h2>
+			<p class="exe_desc">
+				Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 20</h2>
+			<p class="exe_desc">
+				Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+				<br>
+				La expresión regular que uso para el email en este video /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 21</h2>
+			<p class="exe_desc">
+				Programa una función que dado un array numérico devuelve otro array con los números elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 22</h2>
+			<p class="exe_desc">
+				Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 23</h2>
+			<p class="exe_desc">
+				Programa una función que dado un array de números devuelva un objeto con 2 arreglos en el primero almacena los números pares y en el segundo los impares, pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}.
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 24</h2>
+			<p class="exe_desc">
+				Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, el primero tendrá los numeros ordenados en forma ascendente y el segundo de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 25</h2>
+			<p class="exe_desc">
+				Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 26</h2>
+			<p class="exe_desc">
+				Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 27</h2>
+			<p class="exe_desc">
+				Programa una clase llamada Pelicula.
+
+				La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
+				  - Todos los datos del objeto son obligatorios.
+				  - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 
+				     7 restantes números.
+				  - Valida que el título no rebase los 100 caracteres.
+				  - Valida que el director no rebase los 50 caracteres.
+				  - Valida que el año de estreno sea un número entero de 4 dígitos.
+				  - Valida que el país o paises sea introducidos en forma de arreglo.
+				  - Valida que los géneros sean introducidos en forma de arreglo.
+				  - Valida que los géneros introducidos esten dentro de los géneros 
+				     aceptados*.
+				  - Crea un método estático que devuelva los géneros aceptados*.
+				  - Valida que la calificación sea un número entre 0 y 10 pudiendo ser 
+				    decimal de una posición.
+				  - Crea un método que devuelva toda la ficha técnica de la película.
+				  - Apartir de un arreglo con la información de 3 películas genera 3 
+				    instancias de la clase de forma automatizada e imprime la ficha técnica 
+				    de cada película.
+
+				* Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 28</h2>
+			<p class="exe_desc">
+				
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 29</h2>
+			<p class="exe_desc">
+				
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+		<section class="exe">
+			<h2>Ejercicio 30</h2>
+			<p class="exe_desc">
+				
+			</p>
+			<div>
+				<script></script>
+			</div>
+		</section>
+	</div>
+</body>
+</html>
